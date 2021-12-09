@@ -14,6 +14,15 @@ choleskyFunction <- function(Matx){
 }
 #Runs the function
 choleskyFunction(A)
-
-
+##########################################################
+#Question 2 
+#Singular value Decompostion
+#the creation of matrix
+Q2Matrix <- matrix(c(1,1,1,1,2,0,0,0),nrow = 4)
+#Displaying original matrix
+Q2Matrix
+#using the svd function to show the singular values
+sv <-svd(Q2Matrix)
+#Displaying Singular values
+sv
 ##########################################################
