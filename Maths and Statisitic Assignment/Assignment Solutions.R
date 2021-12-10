@@ -39,14 +39,14 @@ y<-seq(-4.5,4.5,length.out = 100)
 z<-outer(x,y,Question5F,a=1,b=100)
 
 #plotting the graph 
-persp(x,y,z,theta =-45,phi=45,expand=0.5,col="yellow",shade =0.65,ticktype ="detailed",xlab ="x",ylab ="y",zlab="z")
+persp(x,y,z,theta =-45,phi=-20,expand=0.5,col="yellow",shade =1,ticktype ="detailed",xlab ="x",ylab ="y",zlab="z")
 
 #Writing the function so x,y is a vector
 Question5FV<-function(vec) (vec[1]^2+vec[2]-11)^2+(vec[1]+vec[2]^2-7)^2
 
 #Minimum can be found based on value being 0 or so close to 0
 
-#Based on plot there seem to be 4 dips, each minimum is extracted here
+#Based on plot there seems to be 4 dips, each minimum is extracted here
 
 #From plot minimum seems to be near x=-4,y=-4.
 minimum1<- optim(c(-4,-4),Question5FV)$par
