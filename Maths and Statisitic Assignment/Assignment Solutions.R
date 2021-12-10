@@ -66,5 +66,6 @@ minimum4
 
 #creating a list of minimums
 minimum_list <- list(minimum1,minimum2,minimum3,minimum4)
+#List of minimum points
 minimum_list
 ##########################################################
