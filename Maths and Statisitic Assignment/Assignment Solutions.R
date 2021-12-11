@@ -65,15 +65,17 @@ minimum3 <- optim(c(-3.5, 3.5),Question5FV)$par
 minimum3
 
 #From plot minimum seems to be near x = 3.5, y = 3.5
-minimum4 <- optim(c(3.5,3.5),Question5FV)$par
+minimum4 <- optim(c(3.5,3.5),Question5FV,hessian = TRUE)$par
 minimum4
+
+optim(c(-4,-4),Question5FV,hessian = TRUE)
 
 #Finding the Maximum points
 maximum1 <- optim(c(0,0),control=list(fnscale=-1),Question5FV)$par
 maximum1
 
 #finding the saddle points
-optimHess(c(-3,0),Question5FV)
+optimHess(c(-4,-4),Question5FV)
 
 ?optim
 #creating a list of critical points
