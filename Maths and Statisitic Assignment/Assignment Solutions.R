@@ -73,18 +73,9 @@ maximum1 <- optim(c(0,0),control=list(fnscale=-1),Question5FV)$par
 maximum1
 
 #finding the saddle points
-fx <- function(x,y,h = 0.001) (f(x+h,y)-f(x,y))/h
-#this discribes the incremental ration, we shock x by adding to it an abitrarily small value, h(=0.001). 
-#In this way, we compute the rate of change (of the function)
-#This is the same as y
-fy <- function(x,y,h=0.001) (f(x,y+h)-f(x,y))/h
+optimHess(c(-3,0),Question5FV)
 
-#now re-use the other function to compute the z values corresponding to the partial derivatives.
-#Thus zfx and zfy are matrices, 400 rows and 400 columns, with values of fx and fy respectivly.
-zfx <- outer(x,y,Question5FV)
-zfv <- outer(x,v,Question5FV)
-
-
+?optim
 #creating a list of critical points
 critical_point_list <- list(minimum1,minimum2,minimum3,minimum4,maximum1)
 #List of critical points
