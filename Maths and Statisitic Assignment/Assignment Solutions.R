@@ -122,36 +122,36 @@ saddle_point_list
 #number of pictures inside of simulation
 npictures <- seq(2,15)
 totalNumberMatched <- 0
-trials <- 100
+
+
 #function of pairing actors
-pairActor <- function(secNumber){
+pairActor <- function(secNumber, trials){
   numberOfActors <- seq(1:secNumber)
   numberOfBabys <- sample(1:secNumber)
   numOfMatches <- 0
   
-  #for loop comparing
-  for(i in 1:secNumber){
-    if(numberOfActors[i] == numberOfBabys[i])
-    {
-      numOfMatches = numOfMatches + 1
+  for (t in 1:trials) {
+    #for loop comparing
+    for(i in 1:secNumber){
+      if(numberOfActors[i] == numberOfBabys[i])
+      {
+        numOfMatches = numOfMatches + 1
+      }
+    }
+    #checking if matches have taken place
+    if(numOfMatches != 0){
+      totalNumberMatched = totalNumberMatched +1
+      numOfMatches = 0
     }
   }
-  #checking if matches have taken place
-  if(numOfMatches != 0){
-    totalNumberMatched = totalNumberMatched +1
-    numOfMatches = 0
-  }
-  totalNumberMatched
-}
-
-for (n in npictures) {
-  for (i in trials) {
-    accuracy <- pairActor(n)/trials  
-  }
+ 
+  percentageSuccess <- totalNumberMatched/trials
 }
 
 
 
+x <- pairActor(2,100)
+x
 
 
 #if number of trials is greater than 1
