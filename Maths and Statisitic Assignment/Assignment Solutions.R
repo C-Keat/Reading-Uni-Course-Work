@@ -34,8 +34,8 @@ sv
 #Function plot - Plot the formula below
 Question5F<-function(x,y,a,b) (x^2+y-11)^2+(x+y^2-7)^2
 #defining the x,y and z of the measurements
-x<-seq(-4.5,4.5,length.out = 100)
-y<-seq(-4.5,4.5,length.out = 100)
+x<-seq(-4.5,4.5,length.out = 200)
+y<-seq(-4.5,4.5,length.out = 200)
 z<-outer(x,y,Question5F,a=1,b=100)
 
 #plotting the graph 
@@ -44,12 +44,8 @@ persp(x,y,z,theta =-45,phi=20,expand=0.5,col="yellow",shade =1,ticktype ="detail
 #Writing the function so x,y is a vector
 Question5FV<-function(vec) (vec[1]^2+vec[2]-11)^2+(vec[1]+vec[2]^2-7)^2
 
-#defining function to find maximum point
-nll.binom <- function(data,par){
-  return(-log(dbinom(data,size = 20, prob = par)))
-}
 
-#Finding the minimums:
+###################Finding the minimums###########################
 #Minimum can be found based on value being 0 or so close to 0
 #Based on plot there seems to be 4 dips representing each minimum is extracted here
 #From plot minimum seems to be near x=-4,y=-4.
@@ -68,14 +64,39 @@ minimum3
 minimum4 <- optim(c(3.5,3.5),Question5FV,hessian = TRUE)$par
 minimum4
 
-optim(c(-4,-4),Question5FV,hessian = TRUE)
-
-#Finding the Maximum points
+####################Finding the Maximum points#####################
 maximum1 <- optim(c(0,0),control=list(fnscale=-1),Question5FV)$par
 maximum1
 
-#finding the saddle points
-optimHess(c(-4,-4),Question5FV)
+###################finding the saddle points######################
+#Lets define the partial derivatives by plugging vec[1] and vec[2] instead of x and y
+fx <- function(x,y,h=0.001){
+  (Question5F(x+h,y) - Question5F(x,y))/h
+}
+fy <- function(x,y,h=0.001){
+  (Question5F(x,y+h)-Question5F(x,y))/h
+}
+
+
+fxb <- function(vec){
+  fx(vec[1],vec[2])
+}
+fyb <- function(vec){
+  fy(vec[1],vec[2])
+}
+
+#call sumssq the function of the vector vec made of the sum of the squares
+#of the two parial derivatives
+sumssq <- function(vec){
+  fxb(vec)^2+fyb(vec)^2
+}
+
+#Now we can find the coordinates of the saddle points through "optim".
+#We do exactly the same thing for all three points, just changing the guess of their location. 
+#according to the graph. 
+
+saddle_point <- optim(c(-3.5,0),sumssq)
+saddle_point
 
 ?optim
 #creating a list of critical points
