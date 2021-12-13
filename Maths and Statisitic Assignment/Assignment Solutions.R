@@ -116,4 +116,52 @@ maximum1
 saddle_point_list <- list(saddle_point1,saddle_point2,saddle_point3)
 #Print of saddle point list
 saddle_point_list
-##########################################################
+
+####################Question 7########################
+
+#number of pictures inside of simulation
+npictures <- seq(2,15)
+totalNumberMatched <- 0
+
+#function of pairing actors
+pairActor <- function(secNumber){
+  numberOfActors <- seq(1:secNumber)
+  numberOfBabys <- sample(1:secNumber)
+  numOfMatches <- 0
+  
+  #for loop comparing
+  for(i in 1:secNumber){
+    if(numberOfActors[i] == numberOfBabys[i])
+    {
+      numOfMatches = numOfMatches + 1
+    }
+  }
+  #checking if matches have taken place
+  if(numOfMatches != 0){
+    totalNumberMatched = totalNumberMatched +1
+    numOfMatches = 0
+  }
+  
+}
+
+pairActor(2)
+
+#if number of trials is greater than 1
+  # add to totalNumberofMatched 
+  # number of matched zerod 
+
+#figure out if a match took place
+
+#plot the final result on graph
+
+
+
+
+
+
+
+
+
+
+
+
