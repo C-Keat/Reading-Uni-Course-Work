@@ -95,12 +95,25 @@ sumssq <- function(vec){
 #We do exactly the same thing for all three points, just changing the guess of their location. 
 #according to the graph. 
 
-saddle_point <- optim(c(-3.5,0),sumssq)
-saddle_point
+saddle_point1 <- optim(c(-3.5,0),sumssq)$par
+saddle_point1
 
-?optim
-#creating a list of critical points
-critical_point_list <- list(minimum1,minimum2,minimum3,minimum4,maximum1)
-#List of critical points
-critical_point_list
+saddle_point2 <- optim(c(0,-3.5),sumssq)$par
+saddle_point2
+
+saddle_point3 <- optim(c(0,2),sumssq)$par
+saddle_point3
+
+#creating a list of minimum points
+minimum_list <- list(minimum1,minimum2,minimum3,minimum4)
+#List of minimum points
+minimum_list
+
+#this represents the only maximum point in graph
+maximum1
+
+#list of saddle points
+saddle_point_list <- list(saddle_point1,saddle_point2,saddle_point3)
+#Print of saddle point list
+saddle_point_list
 ##########################################################
