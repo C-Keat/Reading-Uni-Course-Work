@@ -121,45 +121,61 @@ saddle_point_list
 
 #number of pictures inside of simulation
 
+#variable to keep track of matched amount
 totalNumberMatched <- 0
 
 
 #function of pairing actors
 pairActor <- function(secNumber, trials){
+  #variable to track if match has taken place
   numOfMatches <- 0
-  
+  #looping through number of trials = 100,000
   for (t in 1:trials) {
+    #variables storing the number of photos present in each sequance
     numberOfActors <- seq(1:secNumber)
     numberOfBabys <- sample(1:secNumber)
+    
     #for loop comparing
     for(i in 1:secNumber){
       if(numberOfActors[i] == numberOfBabys[i])
       {
+        #If match takes place, log
         numOfMatches = numOfMatches + 1
       }
     }
     #checking if matches have taken place
     if(numOfMatches != 0){
+      #if any number of matches has taken place, track total number of matches
       totalNumberMatched = totalNumberMatched +1
+      #Number of matches set to zero so tracking can take place
       numOfMatches = 0
     }
   }
- 
+ #print out the % of successful matches over the trials
   percentageSuccess <- totalNumberMatched/trials
   return(percentageSuccess)
 }
 
+#set the number of pictures present
 nPictures <- seq(2,15)
+#define the number of times the results will be collected
 result <- seq(1,14)
 
+#call the function 14 times storing the results each time,  
 for(n in 1:14){
   result[n] <- pairActor(nPictures[n],100000)  
-
 }
 
+#forming a final plot so that it can be plotted againced the correct number of photos
 finalPlot <- matrix(c(seq(2,15),result), nrow = 14)
 
+#plotting the final results on graph
 plot(finalPlot,main = "100,000 tests", xlab = "Num of Photos",ylab = "Estimated probability")
+
+#Commenting done inside of submission document. 
+#Discussing the reason probability stabilizes at 5+ photos
+
+
 ################################## Question 8 ##################################
 
 
