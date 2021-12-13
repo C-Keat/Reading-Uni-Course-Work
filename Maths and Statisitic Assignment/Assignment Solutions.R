@@ -117,7 +117,7 @@ saddle_point_list <- list(saddle_point1,saddle_point2,saddle_point3)
 #Print of saddle point list
 saddle_point_list
 
-####################Question 7########################
+####################Question 7#################################
 
 #number of pictures inside of simulation
 
@@ -159,17 +159,8 @@ for(n in 1:14){
 
 finalPlot <- matrix(c(seq(2,15),result), nrow = 14)
 
-plot(finalPlot)
-
-
-
-#if number of trials is greater than 1
-  # add to totalNumberofMatched 
-  # number of matched zerod 
-
-#figure out if a match took place
-
-#plot the final result on graph
+plot(finalPlot,main = "100,000 tests", xlab = "Num of Photos",ylab = "Estimated probability")
+################################## Question 8 ##################################
 
 
 
