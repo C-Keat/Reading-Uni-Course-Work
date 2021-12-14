@@ -191,17 +191,14 @@ rotate.m <- function(m) t(m)[,nrow(m):1]
 averOfFaces <- (face1.bmp+face2.bmp+face3.bmp)/3
 
 #plotting image 1
-image(rotate.m(face1.bmp),col = gray((0:32)/32),axes=F)
+image(rotate.m(face1.bmp),col = gray((0:255)/255),axes=F)
 #plotting image 2
-image(rotate.m(face2.bmp),col = gray((0:32)/32),axes=F)
+image(rotate.m(face2.bmp),col = gray((0:255)/255),axes=F)
 #plotting image 3
-image(rotate.m(face3.bmp),col = gray((0:32)/32),axes=F)
+image(rotate.m(face3.bmp),col = gray((0:255)/255),axes=F)
 
 #Plotting the average of the 3 images
-image(rotate.m(averOfFaces),col = gray((0:32)/32),axes=F)
-
-#4 figures arranged in 2 rows and 2 columns
-attach(face1.bmp)
+image(rotate.m(averOfFaces),col = gray((0:255)/255),axes=F)
 
 #Plotting images of difference of each face from the average face on one figure.
 #defining the difference between the original faces vs the average face
@@ -211,14 +208,14 @@ differnce3 <- face3.bmp - averOfFaces
 
 par(mfrow = c(2,2))
 #plotting image 1
-image(rotate.m(differnce1),col = gray((0:32)/32),axes=F)
+image(rotate.m(differnce1),col = gray((0:255)/255),axes=F)
 #plotting image 2
-image(rotate.m(differnce2),col = gray((0:32)/32),axes=F)
+image(rotate.m(differnce2),col = gray((0:255)/255),axes=F)
 #plotting image 3
-image(rotate.m(differnce3),col = gray((0:32)/32),axes=F)
+image(rotate.m(differnce3),col = gray((0:255)/255),axes=F)
 
 #Plotting the average of the 3 images
-image(rotate.m(averOfFaces),col = gray((0:32)/32),axes=F)
+image(rotate.m(averOfFaces),col = gray((0:255)/255),axes=F)
 
 #Based on the covariance matrix of the differences, calculate eigenfaces
 #(equal to eigenvectors) and plot images of the first 3 eigenfaces.
@@ -226,13 +223,100 @@ image(rotate.m(averOfFaces),col = gray((0:32)/32),axes=F)
 #Egienvectors are a special set of vectors with a linear system of equations
 #i.e., a matrix equation that are sometimes also know as characteristics vectors
 #proper vectors, or latent vectors. 
-
+###############################################################
 #the difference variables represent the Covariance matrix
 
-#Calculate covariance matrix using the cov function 
-A <- cov(averOfFaces)
+differnce1
 
-#Calculating eigenvalues and eigenvectors 
-#Calculate the largest eigenvalues and corresponding eigenvectors
-eigs <- eigs(A,40,which = "LM")
+D1 <- scale(differnce1)
+
+#covariance matrix
+A <- cov(D1)
+is.matrix(A)
+dim(A)
+
+eigs <- eigs(A,51,which = "LM")
+
+# Eigenvalues
+eigenvalues <- eigs$values
+# Eigenvectors (also called loadings or "rotation" in R prcomp function: i.e. prcomp(A)$rotation)
+eigenvectors <- eigs$vectors
+
+par(mfrow=c(1,1))
+par(mar=c(2.5,2.5,2.5,2.5))
+y=eigenvalues[1:40]
+# First 40 eigenvalues dominate
+plot(1:40, y, type="o", log = "y", main="Magnitude of the 40 biggest eigenvalues", xlab="Eigenvalue #", ylab="Magnitude")
+
+sum(eigenvalues)/sum(eigen(A)$values)
+
+dim(eigenvectors[,A])
+dim(face1.bmp)
+
+image(rotate.m(eigenvectors[,A]),col = gray((0:32)/32),axes=F)
+
+imageShow(eigenvectors[,A])
+
+###############################################################
+is.matrix(face1.bmp)
+dim(face1.bmp)
+range(face1.bmp)
+#######################################
+#checking if they are a matix
+is.matrix(averOfFaces)
+
+A <- face1.bmp
+AtA <- t(A)%*%A
+AAt <- A%*%t(A)
+
+AtA
+AAt
+
+eigs <- eigen(A%*%t(A))$values
+eigs
+U <- eigen(A%*%t(A))$vector
+V <- eigen(t(A)%*%A)$vector
+D<-diag(sqrt(eigs[1:2]))
+U<--U[1:2]
+V[,2]<--V[,2]
+dim(U)
+############################################
+#SVDing the image to find the eigenvalue
+sv <- svd(face1.bmp)
+#checking to make sure that it is a matrix
+is.matrix(sv$u)
+#using dim to prove that the matrix dimensions are the same as the original
+dim(sv$u)
+
+#saving the sv$u as a matrix that can be stored with fixed dimentions
+matrixPlot <- matrix(sv$u,55,51,byrow = T)
+matrixPlot
+
+#attempting to plot the egienface via the eigen matrix that is taken from above.
+image(rotate.m(matrixPlot),col = gray((0:255)/255),axes=F)
+
+
+
+##############################################
+
+dim(face1.bmp)
+
+
+
+
+D <-data.matrix(face1.bmp)
+
+D
+
+D <-scale(D)
+
+A<- cov(D)
+A_ <- t(D) %*% D / (nrow(D)-1)
+
+is.matrix(A)
+dim(A)
+
+
+
+
 
