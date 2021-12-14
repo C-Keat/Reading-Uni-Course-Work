@@ -220,8 +220,19 @@ image(rotate.m(differnce3),col = gray((0:32)/32),axes=F)
 #Plotting the average of the 3 images
 image(rotate.m(averOfFaces),col = gray((0:32)/32),axes=F)
 
+#Based on the covariance matrix of the differences, calculate eigenfaces
+#(equal to eigenvectors) and plot images of the first 3 eigenfaces.
 
+#Egienvectors are a special set of vectors with a linear system of equations
+#i.e., a matrix equation that are sometimes also know as characteristics vectors
+#proper vectors, or latent vectors. 
 
+#the difference variables represent the Covariance matrix
 
+#Calculate covariance matrix using the cov function 
+A <- cov(averOfFaces)
 
+#Calculating eigenvalues and eigenvectors 
+#Calculate the largest eigenvalues and corresponding eigenvectors
+eigs <- eigs(A,40,which = "LM")
 
