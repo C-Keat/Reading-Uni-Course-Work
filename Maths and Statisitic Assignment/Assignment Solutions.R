@@ -178,11 +178,47 @@ plot(finalPlot,main = "100,000 tests", xlab = "Num of Photos",ylab = "Estimated 
 
 ################################## Question 8 ##################################
 
+#loading the images
+face1.bmp <- read.bmp(file.choose())
+face2.bmp <- read.bmp(file.choose())
+face3.bmp <- read.bmp(file.choose())
 
+#Working out the averages of the 3 faces and plot an image of it
+#defining rotate function
+rotate.m <- function(m) t(m)[,nrow(m):1]
 
+#getting the average of the 3 face matrix
+averOfFaces <- (face1.bmp+face2.bmp+face3.bmp)/3
 
+#plotting image 1
+image(rotate.m(face1.bmp),col = gray((0:32)/32),axes=F)
+#plotting image 2
+image(rotate.m(face2.bmp),col = gray((0:32)/32),axes=F)
+#plotting image 3
+image(rotate.m(face3.bmp),col = gray((0:32)/32),axes=F)
 
+#Plotting the average of the 3 images
+image(rotate.m(averOfFaces),col = gray((0:32)/32),axes=F)
 
+#4 figures arranged in 2 rows and 2 columns
+attach(face1.bmp)
+
+#Plotting images of difference of each face from the average face on one figure.
+#defining the difference between the original faces vs the average face
+differnce1 <- face1.bmp - averOfFaces
+differnce2 <- face2.bmp - averOfFaces
+differnce3 <- face3.bmp - averOfFaces
+
+par(mfrow = c(2,2))
+#plotting image 1
+image(rotate.m(differnce1),col = gray((0:32)/32),axes=F)
+#plotting image 2
+image(rotate.m(differnce2),col = gray((0:32)/32),axes=F)
+#plotting image 3
+image(rotate.m(differnce3),col = gray((0:32)/32),axes=F)
+
+#Plotting the average of the 3 images
+image(rotate.m(averOfFaces),col = gray((0:32)/32),axes=F)
 
 
 
