@@ -223,3 +223,17 @@ image(rotate.m(averOfFaces),col = gray((0:255)/255),axes=F)
 #Egienvectors are a special set of vectors with a linear system of equations
 #i.e., a matrix equation that are sometimes also know as characteristics vectors
 #proper vectors, or latent vectors. 
+sv<-svd(differnce1)
+
+#getting the eigenvector of the covariance matrix 
+eigenVectorMatrix <- sv$u
+
+#checking that it is the same dimentions and that it is a martix
+dim(eigenVectorAvr)
+is.matrix(eigenVectorAvr)
+
+#plotting the eigenvectorMatrix
+image(rotate.m(eigenVectorAvr),col = gray((0:55)/55),axes=F)
+
+
+
