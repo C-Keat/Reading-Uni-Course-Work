@@ -239,6 +239,26 @@ image(rotate.m(eigenVectorAvr),col = gray((0:55)/55),axes=F)
 
 
 ###########################Question 9 #########################
+#final answer
+
+generateMeanData <-function(m,n){
+  
+  dataSets <- array(0,dim = c(n,n,m))
+  
+  bdData <- apply(dataSets,3,function(x) rbinom(n,size = 10,prob = 0.01))
+  
+}
+
+meanOf20 <-apply(generateMeanData(10000,20),2,function(x) c(mean(x)))
+meanOf100 <-apply(generateMeanData(10000,100),2,function(x) c(mean(x)))
+
+par(mfrow = c(1,2))
+
+
+hist(meanOf20)
+hist(meanOf100)
+
+########################### First attempt #################
 
 generateData <-function(m,n){
   
@@ -256,3 +276,5 @@ moreTrials <-t(apply(generateData(10000,100),2,function(x) c(mean(x))))
 par(mfrow = c(1,2))
 hist(lessTrials)
 hist(moreTrials)
+
+
