@@ -239,8 +239,8 @@ image(rotate.m(eigenVectorAvr),col = gray((0:55)/55),axes=F)
 
 
 ###########################Question 9 #########################
-#final answer
 
+#define function that generates data from a binomial distribution
 generateMeanData <-function(m,n){
   
   dataSets <- array(0,dim = c(n,n,m))
@@ -248,10 +248,11 @@ generateMeanData <-function(m,n){
   bdData <- apply(dataSets,3,function(x) rbinom(n,size = 10,prob = 0.01))
   
 }
-
+#gets the mean from the generate data
 meanOf20 <-apply(generateMeanData(10000,20),2,function(x) c(mean(x)))
 meanOf100 <-apply(generateMeanData(10000,100),2,function(x) c(mean(x)))
 
+#plot the histogram
 par(mfrow = c(1,2))
 
 
