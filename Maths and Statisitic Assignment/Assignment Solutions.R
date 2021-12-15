@@ -3,17 +3,35 @@
 #Defining the Matrix
 A<-matrix(c(3,-1,0,-1,0,-1,3,-1,3,-1,0,-1,3,1,0,-1,3,1,5,-1,0,-1,0,-1,1), nrow=5)
 
-#Function that can be passed Matx in order to perform Cholesky Functions
-choleskyFunction <- function(Matx){
-  #Finds the upper triangular matrix
-  L<-chol(Matx)
-  #Transposes the matrix to show the lower triangular matrix
-  Lt<-t(L)
-  #Displays the lower hand matrix
-  Lt
+#defining function
+choleskyDecompTrans <- function(m) {
+  cRows <- nrow(m)
+  cCols <- ncol(m)
+  
+  L = diag(0, cRows)
+  
+  for(i in 1:cRows) {
+    
+    for(k in 1:i) {
+      
+      sum <- 0
+      
+      for(j in 1:k)
+        sum <- sum + L[j, i] * L[j, k]
+      #if not diagonal 
+      if(i == k)
+        L[k, i] <- sqrt(m[i, i] - sum)
+      #if diagonal
+      if(k == k)
+        L[k, i] <- (m[k, i] - sum) / L[k, k]
+    }
+  }
+  return(t(L))
 }
+
 #Runs the function
-choleskyFunction(A)
+choleskyDecompTrans(A)
+
 ####################Question 2############################
 #Question 2 
 #Singular value Decompostion
