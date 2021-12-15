@@ -232,8 +232,10 @@ sv <- svd(fullFaceMatrix)
 
 eigenFaces <- sv$u%*%diag(sv$d)%*%sv$v
 
-#something faces, possible eigen faces
-image(matrix(eigenFaces[,1],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F) #proving that the something is real 
+par(mfrow = c(1,3))
+
+#Printing the eigenfaces
+image(matrix(eigenFaces[,1],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F) 
 image(matrix(eigenFaces[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 image(matrix(eigenFaces[,3],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 
