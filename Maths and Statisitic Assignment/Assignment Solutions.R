@@ -217,28 +217,63 @@ image(rotate.m(differnce3),col = gray((0:255)/255),axes=F)
 #Plotting the average of the 3 images
 image(rotate.m(averOfFaces),col = gray((0:255)/255),axes=F)
 
-#Based on the covariance matrix of the differences, calculate eigenfaces
-#(equal to eigenvectors) and plot images of the first 3 eigenfaces.
+#eigenfaces
 
-#Egienvectors are a special set of vectors with a linear system of equations
-#i.e., a matrix equation that are sometimes also know as characteristics vectors
-#proper vectors, or latent vectors. 
-sv<-svd(differnce1)
+#turn face matrix into there own vectors
 
-#getting the eigenvector of the covariance matrix 
-eigenVectorMatrix <- sv$u
+face1Vector <-as.vector(face1.bmp)
+face2Vector <-as.vector(face2.bmp)
+face3Vector <-as.vector(face3.bmp)
 
-#checking that it is the same dimentions and that it is a martix
-dim(eigenVectorAvr)
-is.matrix(eigenVectorAvr)
+#add the vectors together, combining vectors 
+fullFaceVector <- c(face1Vector,face2Vector,face3Vector)
 
-#plotting the eigenvectorMatrix
-image(rotate.m(eigenVectorAvr),col = gray((0:55)/55),axes=F)
+length(fullFaceVector)
+
+#turn the full vector into a matrix
+#fullFaceMatrix <- as.matrix(fullFaceVector)
+
+fullFaceMatrix <- MatrixofDiff <- cbind(as.vector(differnce1),as.vector(differnce2),as.vector(differnce3))
+
+dim(fullFaceMatrix)
+
+fullFaceMatrix
+
+#find the connivance matrix of the full matrix
+
+covMatrix <- cov(fullFaceMatrix)
+dim(covMatrix)
+covMatrix
+
+#find the eigen values and vectors of the new cov matrix
+
+eigs <- eigs(covMatrix,3,which = "LM")
+
+#the Eigenvalues
+eigenValues <- eigs$values
+
+eigenValues
+
+#The eigenVectors
+eigenVectors <- eigs$vectors
+eigenVectors
+
+#plot the first eigenface 
+image(rotate.m(eigenVectors),ncol=55,nrow = 51,col = gray((0:255)/255),axes=F)
 
 
+############################
+
+sv <- svd(fullFaceMatrix)
+
+somthing <- sv$u%*%diag(sv$d)%*%sv$v
+
+image(matrix(sv$u[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
+
+image(matrix(sv$u[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 
 
-###########################Question 9 #########################
+###########################Question 9#########################
 
 #define function that generates data from a binomial distribution
 generateMeanData <-function(m,n){
