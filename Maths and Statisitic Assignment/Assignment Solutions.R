@@ -225,53 +225,17 @@ face1Vector <-as.vector(face1.bmp)
 face2Vector <-as.vector(face2.bmp)
 face3Vector <-as.vector(face3.bmp)
 
-#add the vectors together, combining vectors 
-fullFaceVector <- c(face1Vector,face2Vector,face3Vector)
-
-length(fullFaceVector)
-
-#turn the full vector into a matrix
-#fullFaceMatrix <- as.matrix(fullFaceVector)
-
+#storing the vectors inside of a matrix
 fullFaceMatrix <- MatrixofDiff <- cbind(as.vector(differnce1),as.vector(differnce2),as.vector(differnce3))
-
-dim(fullFaceMatrix)
-
-fullFaceMatrix
-
-#find the connivance matrix of the full matrix
-
-covMatrix <- cov(fullFaceMatrix)
-dim(covMatrix)
-covMatrix
-
-#find the eigen values and vectors of the new cov matrix
-
-eigs <- eigs(covMatrix,3,which = "LM")
-
-#the Eigenvalues
-eigenValues <- eigs$values
-
-eigenValues
-
-#The eigenVectors
-eigenVectors <- eigs$vectors
-eigenVectors
-
-#plot the first eigenface 
-image(rotate.m(eigenVectors),ncol=55,nrow = 51,col = gray((0:255)/255),axes=F)
-
-
-############################
 
 sv <- svd(fullFaceMatrix)
 
-somthing <- sv$u%*%diag(sv$d)%*%sv$v
+eigenFaces <- sv$u%*%diag(sv$d)%*%sv$v
 
-image(matrix(sv$u[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
-
-image(matrix(sv$u[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
-
+#something faces, possible eigen faces
+image(matrix(eigenFaces[,1],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F) #proving that the something is real 
+image(matrix(eigenFaces[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
+image(matrix(eigenFaces[,3],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 
 ###########################Question 9#########################
 
