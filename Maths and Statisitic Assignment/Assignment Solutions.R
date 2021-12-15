@@ -237,3 +237,22 @@ image(rotate.m(eigenVectorAvr),col = gray((0:55)/55),axes=F)
 
 
 
+
+###########################Question 9 #########################
+
+generateData <-function(m,n){
+  
+  data <- matrix(rbinom(m,10,0.01),n,n)
+}
+
+lessTrials<- t(apply(generateData(10000,20),2,function(x) c(mean(x))))
+lessTrials
+
+
+
+
+moreTrials <-t(apply(generateData(10000,100),2,function(x) c(mean(x))))
+
+par(mfrow = c(1,2))
+hist(lessTrials)
+hist(moreTrials)
