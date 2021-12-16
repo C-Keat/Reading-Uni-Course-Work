@@ -313,10 +313,10 @@ cheese <- read.table(file.choose(), header = T)
 head(cheese)
 
 sv <- svd(cheese[,2:45])
-sv$d
-
+#plotting the single values of the data matrix
 plot(rev(sv$d))
 
+#renaming the cheese column
 renamedCheese <- rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein_.g.,Lip = Lipid_Tot_.g.,
                         Ash = Ash_.g., Car = Carbohydrt_.g.,Fib = Fiber_TD_.g.,Sug = Sugar_Tot_.g., Cal = Calcium_.mg.,
                         Iron = Iron_.mg.,Mag = Magnesium_.mg.,Phos = Phosphorus_.mg.,Pot = Potassium_.mg., Sod = Sodium_.mg.,
@@ -328,16 +328,19 @@ renamedCheese <- rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein
                         FA_M = FA_Mono_.g., FAP = FA_Poly_.g.,Chole = Cholestrl_.mg.)
 
 
-
+#Performing PCA
 cheese.pca <- prcomp(renamedCheese[,2:45],center = T, scale. = T)
 summary(cheese.pca)
+#plotting biplot
 biplot(cheese.pca,main = "Biplot",ylim = c(-0.3,0.3),xlim = c(-0.4,0.4))
 
+#storing the principle component %s 
 pcValues <- summary(cheese.pca)$importance[2,]
 
 variation90 <- 0.00 
 numberOfPcs <- 0.00
 
+#Add the values to find out how many Pcs contribute to 90%
 for (i in 1:length(pcValues)) {
   
   variation90 <- pcValues[i] + variation90
@@ -346,9 +349,7 @@ for (i in 1:length(pcValues)) {
     {
     break
   }
-  
-  
-  
+
 }
 #number of PC values needed to contribute to 90%
 numberOfPcs
