@@ -329,9 +329,13 @@ str(cheese.pca)
 
 biplot(cheese.pca,main = "Biplot",ylim = c(-0.3,0.3),xlim = c(-0.4,0.4))
 
+dim(cheese.pca)
 
+is.matrix(cheese.pca)
 
+sv <- svd(cheese[,2:45])
+sv$d
 
-
+plot(rev(sv$d))
 
 
