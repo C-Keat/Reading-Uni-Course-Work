@@ -255,7 +255,7 @@ image(matrix(eigenFaces[,1],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 image(matrix(eigenFaces[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 image(matrix(eigenFaces[,3],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 
-###########################Question 9#########################
+####################Question 9#########################
 #Binomial Distribution
 
 #define function that generates data from a binomial distribution
@@ -277,3 +277,5 @@ par(mfrow = c(1,2))
 hist(meanOf20)
 hist(meanOf100)
 
+
+####################Question 10
