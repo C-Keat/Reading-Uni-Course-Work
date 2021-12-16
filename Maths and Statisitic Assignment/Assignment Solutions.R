@@ -279,22 +279,21 @@ hist(meanOf100)
 
 
 ####################Question 10
-?rnorm
 
+#define the variables x and y 
 x <- rnorm(20,100,4)
 y <- 2+x+(rnorm(20,0,1))
 
-plot(x)
-plot(y)
-
-
-range(x)
-min(x)
-
-
+#plotting the x and y points with there lines
 plot(x,col="blue",ylim = c(min(x)-1,max(x)-1))
 abline(h=mean(x),col="blue")
 points(y,col="red")
 abline(h=mean(y),col="red")
 
+#storing the independent T test
+unPariedTest <- t.test(x,y)
+#storing the paired test
+pairedTests <- t.test(x,y,paired = T)
 
+unPariedTest
+pairedTests
