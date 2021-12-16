@@ -312,6 +312,11 @@ library(tidyverse)
 cheese <- read.table(file.choose(), header = T)
 head(cheese)
 
+sv <- svd(cheese[,2:45])
+sv$d
+
+plot(rev(sv$d))
+
 renamedCheese <- rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein_.g.,Lip = Lipid_Tot_.g.,
                         Ash = Ash_.g., Car = Carbohydrt_.g.,Fib = Fiber_TD_.g.,Sug = Sugar_Tot_.g., Cal = Calcium_.mg.,
                         Iron = Iron_.mg.,Mag = Magnesium_.mg.,Phos = Phosphorus_.mg.,Pot = Potassium_.mg., Sod = Sodium_.mg.,
@@ -322,20 +327,29 @@ renamedCheese <- rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein
                         Lut = Lut_Zea_..g., VitE = Vit_E_.mg., VitD = Vit_D_.g, VitDI = Vit_D_IU,VitK = Vit_K_..g.,FAS = FA_Sat_.g.,
                         FA_M = FA_Mono_.g., FAP = FA_Poly_.g.,Chole = Cholestrl_.mg.)
 
+
+
 cheese.pca <- prcomp(renamedCheese[,2:45],center = T, scale. = T)
-
 summary(cheese.pca)
-str(cheese.pca)
-
 biplot(cheese.pca,main = "Biplot",ylim = c(-0.3,0.3),xlim = c(-0.4,0.4))
 
-dim(cheese.pca)
+pcValues <- summary(cheese.pca)$importance[2,]
 
-is.matrix(cheese.pca)
+variation90 <- 0.00 
+numberOfPcs <- 0.00
 
-sv <- svd(cheese[,2:45])
-sv$d
-
-plot(rev(sv$d))
-
+for (i in 1:length(pcValues)) {
+  
+  variation90 <- pcValues[i] + variation90
+  numberOfPcs <- numberOfPcs + 1
+  if (variation90 > 0.90) 
+    {
+    break
+  }
+  
+  
+  
+}
+#number of PC values needed to contribute to 90%
+numberOfPcs
 
