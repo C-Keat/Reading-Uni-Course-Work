@@ -317,25 +317,18 @@ cheese.pca <- prcomp(cheese[,2:45],center = T, scale. = T)
 summary(cheese.pca)
 str(cheese.pca)
 
-
-
 biplot(cheese.pca,main = "Biplot")
 
 head(cheese)
 
-rename(cheese,c(Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein_.g.,Lip = Lipid_Tot_.g.,
+rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein_.g.,Lip = Lipid_Tot_.g.,
        Ash = Ash_.g., Car = Carbohydrt_.g.,Fib = Fiber_TD_.g.,Sug = Sugar_Tot_.g., Cal = Calcium_.mg.,
        Iron = Iron_.mg.,Mag = Magnesium_.mg.,Phos = Phosphorus_.mg.,Pot = Potassium_.mg., Sod = Sodium_.mg.,
        Zinc = Zinc_.mg.,Cop = Copper_.mg., Mang = Manganese_.mg.,Selen = Selenium_..g.,vit_c = Vit_C_.mg.,
        Thia = Thiamin_.mg.,Ribof = Riboflavin_.mg., Nia = Niacin_.mg.,Panto = Panto_Acid_.mg.,Vit_B = Vit_B6_.mg.,
        Fol = Folate_Tot_..g.,Food = Food_Folate_..g.,Fola = Folate_DFE_..g.,Chol = Choline_Tot_.mg.,Vit = Vit_B12_..g.,
-       Vit_A = Vit_A_IU,Vit_A_R = Vit_A_RAE,Reti = Retinol_..g., Alph = Alpha_Carot_..g., Beta_Carot_..g.,Beta=Beta_Crypt_..g.,
+       Vit_A = Vit_A_IU,Vit_A_R = Vit_A_RAE,Reti = Retinol_..g., Alph = Alpha_Carot_..g.,BetaC = Beta_Carot_..g.,Beta=Beta_Crypt_..g.,
        Lut = Lut_Zea_..g., VitE = Vit_E_.mg., VitD = Vit_D_.g, VitDI = Vit_D_IU,VitK = Vit_K_..g.,FAS = FA_Sat_.g.,
-       FA_M = FA_Mono_.g., FAP = FA_Poly_.g.,Chol = Cholestrl_.mg.))
-
-rlang::last_error()
-?rename
-
-
+       FA_M = FA_Mono_.g., FAP = FA_Poly_.g.,Chole = Cholestrl_.mg.)
 
 
