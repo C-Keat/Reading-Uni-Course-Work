@@ -327,11 +327,14 @@ renamedCheese <- rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein
                         Lut = Lut_Zea_..g., VitE = Vit_E_.mg., VitD = Vit_D_.g, VitDI = Vit_D_IU,VitK = Vit_K_..g.,FAS = FA_Sat_.g.,
                         FA_M = FA_Mono_.g., FAP = FA_Poly_.g.,Chole = Cholestrl_.mg.)
 
-
+#plotting biplot
+#rownames(renamedCheese) <- cheese[,1]
 #Performing PCA
 cheese.pca <- prcomp(renamedCheese[,2:45],center = T, scale. = T)
 summary(cheese.pca)
-#plotting biplot
+
+#rownames(renamedCheese) <- cheese[,1]
+
 biplot(cheese.pca,main = "Biplot",ylim = c(-0.3,0.3),xlim = c(-0.4,0.4))
 
 #storing the principle component %s 
@@ -351,6 +354,12 @@ for (i in 1:length(pcValues)) {
   }
 
 }
-#number of PC values needed to contribute to 90%
+#number of PC values needed to contribute to 90% = 10
 numberOfPcs
 
+chedderPC<-cheese.pca$x[6,1]
+
+edamPC<-cheese.pca$x[15,1]
+
+chedderPC
+edamPC
