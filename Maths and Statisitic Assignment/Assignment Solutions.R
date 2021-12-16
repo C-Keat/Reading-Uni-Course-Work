@@ -1,5 +1,5 @@
 ####################Question 1############################
-#Question 1
+#Question 1 Cholesky decomposition
 #Defining the Matrix
 A<-matrix(c(3,-1,0,-1,0,-1,3,-1,3,-1,0,-1,3,1,0,-1,3,1,5,-1,0,-1,0,-1,1), nrow=5)
 
@@ -33,8 +33,7 @@ choleskyDecompTrans <- function(m) {
 choleskyDecompTrans(A)
 
 ####################Question 2############################
-#Question 2 
-#Singular value Decompostion
+#Question 2 #Singular value Decompostion
 #the creation of matrix
 Q2Matrix <- matrix(c(1,1,1,1,2,0,0,0),nrow = 4)
 #Displaying original matrix
@@ -48,7 +47,7 @@ sv
 ####################Question 4############################
 #Question 4
 ####################Question 5#############################
-#Question 5
+#Question 5 Use of the Optim Function
 #Function plot - Plot the formula below
 Question5F<-function(x,y,a,b) (x^2+y-11)^2+(x+y^2-7)^2
 #defining the x,y and z of the measurements
@@ -136,8 +135,7 @@ saddle_point_list <- list(saddle_point1,saddle_point2,saddle_point3)
 saddle_point_list
 
 ####################Question 7#################################
-
-#number of pictures inside of simulation
+#Photos of famous actors 
 
 #variable to keep track of matched amount
 totalNumberMatched <- 0
@@ -195,7 +193,7 @@ plot(finalPlot,main = "100,000 tests", xlab = "Num of Photos",ylab = "Estimated 
 
 
 ################################## Question 8 ##################################
-
+#EigenFaces 
 #loading the images
 face1.bmp <- read.bmp(file.choose())
 face2.bmp <- read.bmp(file.choose())
@@ -258,6 +256,7 @@ image(matrix(eigenFaces[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 image(matrix(eigenFaces[,3],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 
 ###########################Question 9#########################
+#Binomial Distribution
 
 #define function that generates data from a binomial distribution
 generateMeanData <-function(m,n){
