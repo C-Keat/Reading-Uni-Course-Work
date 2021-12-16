@@ -279,3 +279,22 @@ hist(meanOf100)
 
 
 ####################Question 10
+?rnorm
+
+x <- rnorm(20,100,4)
+y <- 2+x+(rnorm(20,0,1))
+
+plot(x)
+plot(y)
+
+
+range(x)
+min(x)
+
+
+plot(x,col="blue",ylim = c(min(x)-1,max(x)-1))
+abline(h=mean(x),col="blue")
+points(y,col="red")
+abline(h=mean(y),col="red")
+
+
