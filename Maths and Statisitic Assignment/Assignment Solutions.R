@@ -48,21 +48,54 @@ sv
 #Question 4 Lotka-Volterra model - intro
 
 library(deSolve)
+install.packages("phaseR")
 
+#defining the function where the equations are sorted
 LotVmod <- function(Time,State,Parm){
   with(as.list(c(State,Parm)),{
-    dx = alpha*x - gamma*x^2 - beta*x*y
+    dx = a*x - g *x^2 - b*x*y
     dy = -c*y + d*x*y
     return(list(c(dx,dy)))
   })
 }
-
-Parm <- c(alpha=5,beta=0.01,c=100,d=0.01,g=0.0001)
+#defining the parameters, state and time of the equations
+Parm <- c(a=5,b=0.01,c=100,d=0.01,g=0.0001)
 State <- c(x = 10000, y = 60)
-Time <- seq(0,5,by = 1)
+Time <- seq(0,50,by = 1)
 
+#logging the outputs 
+out <- ode(func = LotVmod, y = State, parms = Parm, times = Time)
 
+#plotting the results on graph
+matplot(out,type = "l")
 
+#finding the equilibrium points
+
+#x = 10000
+#y = 400
+
+#results have been determined though educated guesses, from both the plot and result print out
+#number of times observations took place had to be increased in order to get a definite value
+
+out
+
+#Equilibrium values 
+x <- 10000
+y <- 400
+
+#Defining the parameters
+a=5
+b=0.01
+c=100
+d=0.01
+g=0.0001
+
+dx = a*x - g *x^2 - b*x*y
+dy = -c*y + d*x*y
+
+#printing out both the values, when both values = 0 equilibrium of the system has taken place
+dx # = 0
+dy # = 0
 
 ####################Question 5#############################
 #Question 5 Use of the Optim Function
