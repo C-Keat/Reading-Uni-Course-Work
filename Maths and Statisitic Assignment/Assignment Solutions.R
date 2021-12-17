@@ -45,7 +45,25 @@ sv
 ####################Question 3############################
 #Question 3
 ####################Question 4############################
-#Question 4
+#Question 4 Lotka-Volterra model - intro
+
+library(deSolve)
+
+LotVmod <- function(Time,State,Parm){
+  with(as.list(c(State,Parm)),{
+    dx = alpha*x - gamma*x^2 - beta*x*y
+    dy = -c*y + d*x*y
+    return(list(c(dx,dy)))
+  })
+}
+
+Parm <- c(alpha=5,beta=0.01,c=100,d=0.01,g=0.0001)
+State <- c(x = 10000, y = 60)
+Time <- seq(0,5,by = 1)
+
+
+
+
 ####################Question 5#############################
 #Question 5 Use of the Optim Function
 #Function plot - Plot the formula below
