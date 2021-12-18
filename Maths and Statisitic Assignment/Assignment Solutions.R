@@ -133,7 +133,7 @@ persp(x,y,z,theta =-45,phi=20,expand=0.5,col="yellow",shade =1,ticktype ="detail
 Question5FV<-function(vec) (vec[1]^2+vec[2]-11)^2+(vec[1]+vec[2]^2-7)^2
 
 
-###################Finding the minimums###########################
+##Finding the minimums##
 #Minimum can be found based on value being 0 or so close to 0
 #Based on plot there seems to be 4 dips representing each minimum is extracted here
 #From plot minimum seems to be near x=-4,y=-4.
@@ -151,12 +151,11 @@ minimum3
 #From plot minimum seems to be near x = 3.5, y = 3.5
 minimum4 <- optim(c(3.5,3.5),Question5FV,hessian = TRUE)$par
 minimum4
-
-####################Finding the Maximum points#####################
+##Finding the Maximum points##
 maximum1 <- optim(c(0,0),control=list(fnscale=-1),Question5FV)$par
 maximum1
 
-###################finding the saddle points######################
+##Finding the saddle points##
 #Lets define the partial derivatives by plugging vec[1] and vec[2] instead of x and y
 fx <- function(x,y,h=0.001){
   (Question5F(x+h,y) - Question5F(x,y))/h
@@ -263,7 +262,7 @@ plot(finalPlot,main = "100,000 tests", xlab = "Num of Photos",ylab = "Estimated 
 #Discussing the reason probability stabilizes at 5+ photos
 
 
-################################## Question 8 ##################################
+####################Question 8 ##################################
 #EigenFaces 
 #loading the images
 face1.bmp <- read.bmp(file.choose())
