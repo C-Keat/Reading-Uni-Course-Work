@@ -1,4 +1,5 @@
 ####################Question 1############################
+
 #Question 1 Cholesky decomposition
 #Defining the Matrix
 A<-matrix(c(3,-1,0,-1,0,-1,3,-1,3,-1,0,-1,3,1,0,-1,3,1,5,-1,0,-1,0,-1,1), nrow=5)
@@ -33,16 +34,23 @@ choleskyDecompTrans <- function(m) {
 choleskyDecompTrans(A)
 
 ####################Question 2############################
-#Question 2 #Singular value Decompostion
+
+#Question 2 - Singular value Decomposition
+
 #the creation of matrix
 Q2Matrix <- matrix(c(1,1,1,1,2,0,0,0),nrow = 4)
+
 #Displaying original matrix
 Q2Matrix
+
 #using the svd function to show the singular values
 sv <-svd(Q2Matrix)
+
 #Displaying Singular values
 sv
+
 ####################Question 3############################
+
 #Question 3 Differential equations in R
 
 #defining the parameters
@@ -57,6 +65,7 @@ derivs.Yv3 <- function(time,Yv,parms){
     list(c(dY,dY2,dv))
     })
 }
+
 #How many observations 
 times <- seq(from = 0, to = 5, by = 1)
 
@@ -65,10 +74,12 @@ out.Yv3 <- ode(y=Yini,times=times,func = derivs.Yv3,parms = NULL)
 plot(out.Yv3[,"time"],out.Yv3[,"Y"],type="l",xlab="time",ylab="Y",col="green",lwd=2)
 
 ####################Question 4############################
-#Question 4 Lotka-Volterra model - intro
 
+#Question 4 Lotka-Volterra model
 library(deSolve)
 install.packages("phaseR")
+
+#(a)
 
 #defining the function where the equations are sorted
 LotVmod <- function(Time,State,Parm){
@@ -78,24 +89,29 @@ LotVmod <- function(Time,State,Parm){
     return(list(c(dx,dy)))
   })
 }
+
 #defining the parameters, state and time of the equations
 Parm <- c(a=5,b=0.01,c=100,d=0.01,g=0.0001)
 State <- c(x = 10000, y = 60)
-Time <- seq(0,50,by = 1)
+Time <- seq(0,5,by = 1)
 
 #logging the outputs 
 out <- ode(func = LotVmod, y = State, parms = Parm, times = Time)
 
+#(b)
 #plotting the results on graph
 matplot(out,type = "l")
 
+#(c)
 #finding the equilibrium points
 
 #x = 10000
 #y = 400
 
-#results have been determined though educated guesses, from both the plot and result print out
-#number of times observations took place had to be increased in order to get a definite value
+#Results have been determined though educated guesses
+#From both the plot and result print out.
+#Number of times observations took place had to be increased
+#in order to get a definite value.
 
 out
 
@@ -113,14 +129,17 @@ g=0.0001
 dx = a*x - g *x^2 - b*x*y
 dy = -c*y + d*x*y
 
-#printing out both the values, when both values = 0 equilibrium of the system has taken place
+#Printing out both the values, 
+#When both values = 0 equilibrium of the system has taken place
 dx # = 0
 dy # = 0
 
 ####################Question 5#############################
+
 #Question 5 Use of the Optim Function
 #Function plot - Plot the formula below
 Question5F<-function(x,y,a,b) (x^2+y-11)^2+(x+y^2-7)^2
+
 #defining the x,y and z of the measurements
 x<-seq(-4.5,4.5,length.out = 200)
 y<-seq(-4.5,4.5,length.out = 200)
@@ -151,6 +170,7 @@ minimum3
 #From plot minimum seems to be near x = 3.5, y = 3.5
 minimum4 <- optim(c(3.5,3.5),Question5FV,hessian = TRUE)$par
 minimum4
+
 ##Finding the Maximum points##
 maximum1 <- optim(c(0,0),control=list(fnscale=-1),Question5FV)$par
 maximum1
@@ -173,7 +193,7 @@ fyb <- function(vec){
 }
 
 #call sumssq the function of the vector vec made of the sum of the squares
-#of the two parial derivatives
+#of the two partial derivatives
 sumssq <- function(vec){
   fxb(vec)^2+fyb(vec)^2
 }
@@ -205,11 +225,10 @@ saddle_point_list <- list(saddle_point1,saddle_point2,saddle_point3)
 saddle_point_list
 
 ####################Question 7#################################
-#Photos of famous actors 
 
+#Question 7 - Photos of famous actors 
 #variable to keep track of matched amount
 totalNumberMatched <- 0
-
 
 #function of pairing actors
 pairActor <- function(secNumber, trials){
@@ -252,18 +271,21 @@ for(n in 1:14){
   result[n] <- pairActor(nPictures[n],100000)  
 }
 
-#forming a final plot so that it can be plotted againced the correct number of photos
+#forming a final plot so that it can be plotted against the correct number of photos
 finalPlot <- matrix(c(seq(2,15),result), nrow = 14)
 
 #plotting the final results on graph
 plot(finalPlot,main = "100,000 tests", xlab = "Num of Photos",ylab = "Estimated probability")
+
 
 #Commenting done inside of submission document. 
 #Discussing the reason probability stabilizes at 5+ photos
 
 
 ####################Question 8 ##################################
-#EigenFaces 
+library(bmp)
+
+#Question 8 - EigenFaces 
 #loading the images
 face1.bmp <- read.bmp(file.choose())
 face2.bmp <- read.bmp(file.choose())
@@ -326,7 +348,8 @@ image(matrix(eigenFaces[,2],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 image(matrix(eigenFaces[,3],nrow = 51,byrow = T),col = gray((0:255)/255),axes=F)
 
 ####################Question 9#########################
-#Binomial Distribution
+
+#Question 9 - Binomial Distribution
 
 #define function that generates data from a binomial distribution
 generateMeanData <-function(m,n){
@@ -350,6 +373,7 @@ hist(meanOf100)
 
 ####################Question 10#########
 
+#Question 10 - t-tests
 #define the variables x and y 
 x <- rnorm(20,100,4)
 y <- 2+x+(rnorm(20,0,1))
@@ -370,7 +394,7 @@ pairedTests
 
 ####################Question 12###############
 
-#Principle component analysis
+#Question 12 - Principle component analysis
 install.packages("HSAUR3")
 install.packages("ggbiplot")
 install.packages("tidyverse")
@@ -384,7 +408,8 @@ head(cheese)
 
 sv <- svd(cheese[,2:45])
 #plotting the single values of the data matrix
-plot(rev(sv$d))
+plot(rev(sv$d),main = "Singular values", xlab = "Index",ylab = "Singular value")
+sv$d
 
 #renaming the cheese column
 renamedCheese <- rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein_.g.,Lip = Lipid_Tot_.g.,
@@ -398,13 +423,10 @@ renamedCheese <- rename(cheese,Water = Water_.g.,Ener = Energ_Kcal,Pro = Protein
                         FA_M = FA_Mono_.g., FAP = FA_Poly_.g.,Chole = Cholestrl_.mg.)
 
 #plotting biplot
-#rownames(renamedCheese) <- cheese[,1]
+
 #Performing PCA
 cheese.pca <- prcomp(renamedCheese[,2:45],center = T, scale. = T)
 summary(cheese.pca)
-
-#rownames(renamedCheese) <- cheese[,1]
-
 biplot(cheese.pca,main = "Biplot",ylim = c(-0.3,0.3),xlim = c(-0.4,0.4))
 
 #storing the principle component %s 
@@ -427,9 +449,8 @@ for (i in 1:length(pcValues)) {
 #number of PC values needed to contribute to 90% = 10
 numberOfPcs
 
+#Storing and printing the PCA scores for Chedder and Edam
 chedderPC<-cheese.pca$x[6,1]
-
 edamPC<-cheese.pca$x[15,1]
-
 chedderPC
 edamPC
