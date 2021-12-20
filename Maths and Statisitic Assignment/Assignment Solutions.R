@@ -61,7 +61,7 @@ derivs.Yv3 <- function(time,Yv,parms){
   with(as.list(c(Yv,parms)),{
     dY <- v
     dY2 <- v2
-    dv <- (exp(-time)-v2+v+y)/4
+    dv <- (exp(-time)-v2+v+y)/3
     list(c(dY,dY2,dv))
     })
 }
