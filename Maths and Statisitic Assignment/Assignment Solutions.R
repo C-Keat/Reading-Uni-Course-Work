@@ -52,16 +52,16 @@ sv
 ####################Question 3############################
 
 #Question 3 Differential equations in R
-
+library(deSolve)
 #defining the parameters
-Yini<-c(Y=0,v=1,v2=-(5/2))
+Yini<-c(y=0,v=1,v2=-(5/2))
 
 #function solving differential equation
 derivs.Yv3 <- function(time,Yv,parms){
   with(as.list(c(Yv,parms)),{
     dY <- v
     dY2 <- v2
-    dv <- (exp(-time)-v2+v+y)/3
+    dv <- (exp(-time)-v2+v+y)/4
     list(c(dY,dY2,dv))
     })
 }
@@ -71,7 +71,7 @@ times <- seq(from = 0, to = 5, by = 1)
 
 #Solving and plotting
 out.Yv3 <- ode(y=Yini,times=times,func = derivs.Yv3,parms = NULL)
-plot(out.Yv3[,"time"],out.Yv3[,"Y"],type="l",xlab="time",ylab="Y",col="green",lwd=2)
+plot(out.Yv3[,"time"],out.Yv3[,"y"],type="l",xlab="time",ylab="Y",col="green",lwd=2)
 
 ####################Question 4############################
 
