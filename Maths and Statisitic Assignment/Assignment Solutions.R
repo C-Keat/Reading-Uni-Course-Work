@@ -393,6 +393,9 @@ unPariedTest
 pairedTests
 
 ####################Question 11#########
+
+#Question 11 - Ridge regression
+
 install.packages("glmnet")
 install.packages("ElemStatLearn")
 library(glmnet)
@@ -430,25 +433,22 @@ ridgeEstimates <- function(x,y){
   
   #now calculate the mean squared error of the difference between the true values, stored in y.test.
   #and the predicted values, stored in alpha0.predicted.
+
+  #stores the lambda mean
+  lambda_mean_value <- mean((y.test - alpha0.predicted)^2)
+
+  #stores all lambda values
+  lambda_value <- alpha0.fit$lambda
   
-  
-  lambda_value <- mean((y.test - alpha0.predicted)^2)
-  lambda_value
 }
+
+#runs function and plots ridge estimates
 ridgeEstimates(x,y)
 
-################Test ground ##################
+lambda_mean_value
+lambda_value
 
-
-ridge1 <- lm.ridge(y.train ~ x.train)
-
-ridge1$coef
-dof <- seq(1,8,0.1)
-
-
-
-matplot(dof,t(ridge1$coef), type = "l")
-
+plot(alpha0.fit)
 
 ####################Question 12###############
 
