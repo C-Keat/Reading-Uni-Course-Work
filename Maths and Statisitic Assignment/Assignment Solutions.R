@@ -392,6 +392,60 @@ pairedTests <- t.test(x,y,paired = T)
 unPariedTest
 pairedTests
 
+####################Question 11#########
+install.packages("glmnet")
+install.packages("ElemStatLearn")
+library(glmnet)
+library(ElemStatLearn)
+
+#n the data set will have 1000 samples
+n <- 100
+p <- 100 #p = 5000 parameters to estimate
+real_p <- 20 #Only 20 of those parameters will help us predict the outcome
+
+#x = a matrix of randomly generated data
+x <- matrix(rnorm(n*p),nrow = n,ncol=p)
+
+#now we create a vector of values,called y, that we will try to predict with the data in x.
+y <- apply(x[,1:real_p],1,sum)+rnorm(n)
+
+#Defining function using cv.glmnet
+ridgeEstimates <- function(x,y){
+  
+  #So we make a vector of indexes, called train_rows,
+  #that contains the row numbers of the rows that will be in the training set. 
+  train_rows <- sample(1:n, .66*n)
+  
+  x.train <- x[train_rows,] #Store the training data of x
+  x.test <- x[-train_rows,] #Store the test data of x
+  
+  y.train <- y[train_rows] #Stores the test data of Y
+  y.test <- y[-train_rows] #Stores the test data of Y
+  
+  #first we need to fit a model to the training data
+  alpha0.fit <- cv.glmnet(x.train, y.train, type.measure = "mse", alpha = 0, family = "gaussian")
+  #the CV part means we want to use cross validation to obtain the values of lambda.
+  
+  alpha0.predicted <- predict(alpha0.fit, s=alpha0.fit$lambda.1se, newx=x.test)
+  
+  #now calculate the mean squared error of the difference between the true values, stored in y.test.
+  #and the predicted values, stored in alpha0.predicted.
+  
+  
+  lambda_value <- mean((y.test - alpha0.predicted)^2)
+  lambda_value
+}
+
+ridge1 <- lm.ridge(y.train ~ x.train)
+
+ridge1$coef
+
+
+ridgeEstimates(x,y)
+
+
+
+
 ####################Question 12###############
 
 #Question 12 - Principle component analysis
