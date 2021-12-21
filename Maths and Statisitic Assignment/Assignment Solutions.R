@@ -399,8 +399,8 @@ library(glmnet)
 library(ElemStatLearn)
 
 #n the data set will have 1000 samples
-n <- 100
-p <- 100 #p = 5000 parameters to estimate
+n <- 1000
+p <- 5000 #p = 5000 parameters to estimate
 real_p <- 20 #Only 20 of those parameters will help us predict the outcome
 
 #x = a matrix of randomly generated data
@@ -435,15 +435,19 @@ ridgeEstimates <- function(x,y){
   lambda_value <- mean((y.test - alpha0.predicted)^2)
   lambda_value
 }
+ridgeEstimates(x,y)
+
+################Test ground ##################
+
 
 ridge1 <- lm.ridge(y.train ~ x.train)
 
 ridge1$coef
+dof <- seq(1,8,0.1)
 
 
-ridgeEstimates(x,y)
 
-
+matplot(dof,t(ridge1$coef), type = "l")
 
 
 ####################Question 12###############
