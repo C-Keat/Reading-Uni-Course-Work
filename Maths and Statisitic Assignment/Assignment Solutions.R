@@ -441,16 +441,15 @@ ridgeEstimates <- function(x,y){
   lambda_value <- alpha0.fit$lambda
   print(lambda_value)
   
+  print(lambda_mean_value)
+  
   plot(alpha0.fit)
 }
 
 #runs function and plots ridge estimates
 ridgeEstimates(x,y)
 
-lambda_mean_value
-lambda_value
 
-plot(alpha0.fit)
 
 ####################Question 12###############
 
