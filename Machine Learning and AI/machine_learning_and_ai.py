@@ -173,13 +173,6 @@ final_df = selected_columns
 #again looking at the correlation between remaining attributes
 final_df.corr().style.background_gradient(cmap = cm)
 
-"""##Feature Selection
-
-In machine learning and statistics, feature selection, also known as variable selection, attribute selection or variable subset selection, is the process of selecting a subset of relevant features for use in model.
-"""
-
-
-
 """#Model training and evaluation
 
 Below will be where each of the classification algorithms selected will be defined, there will also be light justification at the start of each to discuss why the specific classification algorithm has been selected. 
